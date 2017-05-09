@@ -10,6 +10,7 @@ gem 'sqlite3'
 gem 'puma', '~> 3.0'
 gem 'attr_encrypted', '~> 3.0.3'
 gem 'mechanize', '~> 2.7.5', require: false
+gem 'facebook-messenger', '~> 0.11.1'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'

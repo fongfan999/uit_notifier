@@ -10,6 +10,7 @@ class User < ApplicationRecord
 
   validates :username, presence: true, uniqueness: true
   validates :password, presence: true
+  validates :sender_id, presence: true
 
   after_create :get_courses
 
