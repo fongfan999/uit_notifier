@@ -33,4 +33,6 @@ class User < ApplicationRecord
         course.users << self unless course.users.include?(self)
       end
     end
+
+    handle_asynchronously :get_courses
 end

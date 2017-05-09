@@ -32,7 +32,7 @@ class Notification < ApplicationRecord
               next unless user.sender_id
 
               MessengerCommand.new({"id" => user.sender_id},
-                "ff send_notification #{notification.id}").execute
+                "ff send_notification #{notification.id}").delay.execute
             end
           end
         end
