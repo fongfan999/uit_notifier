@@ -9,6 +9,7 @@ gem 'rails', '~> 5.0.2'
 gem 'sqlite3'
 gem 'puma', '~> 3.0'
 gem 'attr_encrypted', '~> 3.0.3'
+gem 'mechanize', '~> 2.7.5', require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
