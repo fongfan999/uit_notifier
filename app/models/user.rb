@@ -14,25 +14,24 @@ class User < ApplicationRecord
 
   after_create :get_courses
 
-  private
-    def get_courses
-      return if self.courses.any?
+  def get_courses
+    return if self.courses.any?
 
-      agent = Mechanize.new
-      page = agent.get(DAA_HOMEPAGE)
-      agent.page.encoding = 'utf-8'
+    agent = Mechanize.new
+    page = agent.get(DAA_HOMEPAGE)
+    agent.page.encoding = 'utf-8'
 
-      daa_form = page.forms.last
-      daa_form.field_with(name: 'name').value = username
-      daa_form.field_with(name: 'pass').value = password
-      agent.submit(daa_form)
+    daa_form = page.forms.last
+    daa_form.field_with(name: 'name').value = username
+    daa_form.field_with(name: 'pass').value = password
+    agent.submit(daa_form)
 
-      agent.get(SCHEDULE_PAGE)
-        .search('.rowspan_data strong:first-child').each do |course|
-        course = Course.find_or_create_by(name: course.text[/.+? /].delete(' '))
-        course.users << self unless course.users.include?(self)
-      end
+    agent.get(SCHEDULE_PAGE)
+      .search('.rowspan_data strong:first-child').each do |course|
+      course = Course.find_or_create_by(name: course.text[/.+? /].delete(' '))
+      course.users << self unless course.users.include?(self)
     end
+  end
 
-    handle_asynchronously :get_courses
+  handle_asynchronously :get_courses
 end
