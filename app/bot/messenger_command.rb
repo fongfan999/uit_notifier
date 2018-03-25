@@ -5,10 +5,10 @@ class MessengerCommand
   AVAILABLE_COMMANDS = %w{ send_notification }
   REQUIRED_ARG_COMMANDS = %w{ send_notification }
 
-  def initialize(sender, text)
-    @sender = sender # {"id"=>"123456789"} 
+  def initialize(sender, text = nil)
+    @sender = sender # {"id"=>"123456789"}
     @user = User.find_by(sender_id: @sender["id"])
-     
+
     if @words = text.try(:split) # ff activate
       @ff = @words[0] # ff
       @command = @words[1] # activate, whoami, ...
